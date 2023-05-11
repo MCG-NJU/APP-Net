@@ -1,0 +1,14 @@
+defaults:
+    - task: cls
+    - model: APP # [APP, ssg]
+    - dataset: scanobjectnn # [scanobjectnn, modelnet40]
+    - task_model: ${defaults.0.task}-${defaults.1.model}
+
+hydra:
+  run:
+    dir: outputs
+
+gpus: [0]
+distrib_backend: dp
+
+exp_name: 'default'

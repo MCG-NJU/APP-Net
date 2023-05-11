@@ -1,0 +1,15 @@
+dataset:
+    name: scanobjectnn 
+    num_classes: 15
+    input_feat: nc 
+    num_points: 1024
+
+# below only for APP-Net
+architecture:
+    down_sample_rate: 8,8,8 # 1,4,4,4 # 8,8,8
+    auxiliary_rate: 64,64,64 # 32,32,32,32 # 64,64,64
+    channels: 32,64,128,256 # ,256
+    train_iter: 1
+    test_iter: 1
+    channel_ratio: 1.0
+

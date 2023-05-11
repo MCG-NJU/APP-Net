@@ -1,0 +1,15 @@
+dataset:
+    name: modelnet40
+    num_classes: 40
+    input_feat: gn # groundtruth normal
+    num_points: 1024
+
+# below only for APP-Net
+architecture:
+    down_sample_rate: 1,4,4,4
+    auxiliary_rate: 32,32,32,32
+    channels: 32,64,128,128,256
+    train_iter: 1
+    test_iter: 1
+    channel_ratio: 1.0
+

@@ -1,0 +1,4 @@
+model:
+    name: ssg
+    op: None
+    use_xyz: True
