@@ -1,0 +1,15 @@
+architecture:
+    down_sample_rate: 1,4,4,4,4
+    auxiliary_rate:  32,32,32,32,32
+    channels: 32,64,128,128,256,256
+    train_iter: 1
+    test_iter: 1
+    channel_ratio: 1
+dataset:
+    name: s3dis # [s3dis, scannetv2]
+    loader: pvcnn # [pvcnn, pn2]
+    num_classes: 13 # s3dis: 13; scannetv2: 21
+    input_feat: prPnc # P: global xyz; p: xyz; n: normal; c: curvature; gn: groundtruth normal; r: rgb
+    val_area: 5
+    color_drop: 0.4
+    num_points: 4096

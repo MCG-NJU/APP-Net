@@ -1,0 +1,3 @@
+task_model:
+    class: semseg.models.APPSemSeg
+    name: semseg-APP

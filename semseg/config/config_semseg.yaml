@@ -1,0 +1,14 @@
+defaults:
+    - task: semseg
+    - model: APP # APP, ssg
+    - dataset: s3dis # [s3dis, scannetv2]
+    - task_model: ${defaults.0.task}-${defaults.1.model}
+
+hydra:
+  run:
+    dir: outputs
+
+gpus: [0]
+distrib_backend: dp
+
+exp_name: default
