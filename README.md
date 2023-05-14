@@ -7,20 +7,17 @@ APP-Net is a fast and memory-efficient backbone for point cloud recognition. The
 
 Setup
 -----
+The version of below dependencies can be modified according to your machine. The tested system is Ubuntu 16.04.
+```
+conda create -n APPNet python=3.7
+conda activate APPNet
+conda install pytorch==1.12.1 torchvision==0.13.1 torchaudio==0.12.1 cudatoolkit=11.3 -c pytorch
+pip install torch-scatter -f https://data.pyg.org/whl/torch-1.12.1+cu113.html
+pip install -e pointnet2_ops_lib/
+pip install -r requirements.txt
+python install python-pcl
+```
 
-* Install ``python`` -- This repo is tested with ``{3.7}``
-
-* Install ``pytorch`` with CUDA -- This repo is tested with ``{1.9}``.
-  >Other versions of ``python`` and ``pytorch`` should also work, feel free to try, as along as there exists compatible ``pytorch_scatter``, but this is not guaranteed.
-
-
-* Install dependencies
-  ```
-  pip install numpy, msgpack-numpy, lmdb, h5py, hydra-core==0.11.3, pytorch-lightning==0.7.1
-  conda install pytorch-scatter -c pyg
-  pip install ./pointnet2_ops_lib/.
-  ```
-  
 Datasets
 --------
 
@@ -30,18 +27,21 @@ Download it from the official website and then unzip it to data folder:
 ```
 mkdir -p classification/datasets
 cd classification/datasets
-wget -c https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip
+wget -c https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip --no-check-certificate
 unzip modelnet40_normal_resampled.zip
 ```
 
 ### ScanObjectNN
 Silimar steps as ModelNet40:
 ```
-mkdir -p classification/datasets/scanobjectnn
+mkdir -p classification/datasets
 cd classification/datasets
-wget -c http://103.24.77.34/scanobjectnn/h5_files.zip
-unzip h5_files.zip
 ```
+Download data from [scanobjectnn](https://drive.google.com/file/d/1v6-JXeBlNvTjKLNlbDKhdc3f33u8PtX7/view?usp=sharing).
+```
+unzip scanobjectnn.zip
+```
+
 
 The final file structure for classification should be like
 
