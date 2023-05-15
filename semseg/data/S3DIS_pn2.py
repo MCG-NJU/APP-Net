@@ -40,7 +40,7 @@ class S3DIS_pn2(data.Dataset):
         self.data_precent = data_precent
         self.input_feat = input_feat
         self.color_drop = color_drop
-        self.folder = "../dataset/indoor3d_sem_seg_hdf5_data"
+        self.folder = "../dataset"
         self.data_dir = os.path.join(BASE_DIR, self.folder)
         self.url = (
             "https://shapenet.cs.stanford.edu/media/indoor3d_sem_seg_hdf5_data.zip"
@@ -55,16 +55,16 @@ class S3DIS_pn2(data.Dataset):
             )
 
             subprocess.check_call(
-                shlex.split("unzip {} -d {}".format(zipfile, BASE_DIR))
+                shlex.split("unzip {} -d {}".format(zipfile, self.data_dir))
             )
 
             subprocess.check_call(shlex.split("rm {}".format(zipfile)))
 
         self.train, self.num_points = train, num_points
 
-        all_files = _get_data_files(os.path.join(self.data_dir, "all_files.txt"))
+        all_files = _get_data_files(os.path.join(self.data_dir, "indoor3d_sem_seg_hdf5_data/all_files.txt"))
         room_filelist = _get_data_files(
-            os.path.join(self.data_dir, "room_filelist.txt")
+            os.path.join(self.data_dir, "indoor3d_sem_seg_hdf5_data/room_filelist.txt")
         )
 
 
