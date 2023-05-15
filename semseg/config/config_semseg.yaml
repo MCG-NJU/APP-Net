@@ -1,7 +1,7 @@
 defaults:
     - task: semseg
     - model: APP # APP, ssg
-    - dataset: s3dis # [s3dis, scannetv2]
+    - dataset: s3dis # [s3dis]
     - task_model: ${defaults.0.task}-${defaults.1.model}
 
 hydra:
