@@ -31,25 +31,63 @@ wget -c https://shapenet.cs.stanford.edu/media/modelnet40_normal_resampled.zip -
 unzip modelnet40_normal_resampled.zip
 ```
 
-### ScanObjectNN
-Silimar steps as ModelNet40:
+### ScanObjectNN 
 ```
-mkdir -p classification/datasets
 cd classification/datasets
 ```
-Download data from [scanobjectnn](https://drive.google.com/file/d/1v6-JXeBlNvTjKLNlbDKhdc3f33u8PtX7/view?usp=sharing).
+Download data from [Google Drive](https://drive.google.com/file/d/1v6-JXeBlNvTjKLNlbDKhdc3f33u8PtX7/view?usp=sharing), [Official](https://hkust-vgd.github.io/scanobjectnn/) or [BaiduYun](https://pan.baidu.com/s/1xDWOY3s9XTrv3DciJ97WiQ)(cdn4).
 ```
 unzip scanobjectnn.zip
 ```
 
+### S3DIS 
 
-The final file structure for classification should be like
+We support two versions of S3DIS, with slight difference in splitting the scenes. The first is the adopted by [PointNet2_Pytorch](https://github.com/erikwijmans/Pointnet2_PyTorch/tree/master). 
+```
+mkdir -p semseg/dataset
+cd semseg/dataset
+wget -c https://shapenet.cs.stanford.edu/media/indoor3d_sem_seg_hdf5_data.zip --no-check-certificate
+unzip indoor3d_sem_seg_hdf5_data.zip
+```
+
+The second is adopted by the [PointCNN](https://github.com/yangyanli/PointCNN) and [PVCNN](https://github.com/mit-han-lab/pvcnn). You can follow them to pre-process the data. We provide a processed one in [BaiduYun](https://pan.baidu.com/s/1CPFTGnJ0OuUlGpGFZhfGTw)(5t2n), which can be uncompressed with 
+```
+cat pointcnn.tar.gz* | tar zx
+```
+
+
+
+
+The dataset file structure should be like
 
 ```
 classification/
                datasets/
                         modelnet40_normal_resampled_cache/
+                                                          train/
+                                                          test/
                         scanobjectnn/
+                                    h5_files/main_split/
+                                                        training_objectdataset_augmentedrot_scale75.h5
+                                                        test_objectdataset_augmentedrot_scale75.h5
+-----------------------------------------------------------------------------------------------------------
+semseg/
+      dataset/
+              indoor3d_sem_seg_hdf5_data/
+                                         all_files.txt
+                                         room_filelist.txt
+                                         ply_data_all_0.h5
+                                         *.h5
+              pointcnn/
+                       Area_1/
+                       Area_2/
+                       Area_3/
+                       Area_4/
+                       Area_5/
+                       Area_6/
+                                      
+              
+                                     
                
 ```
 
@@ -78,7 +116,7 @@ sh cls_train.sh
  {task}/config/config_{task}.yaml
  ```
  
- `{task}` refers to `classification` or `semseg`.
+ `{task}` refers to `classification` or `semseg`. 
 
 
 
@@ -102,4 +140,5 @@ Acknowledgement
 This project is based on the following repos, sincerely thanks to the efforts:
 
 [Pointnet2_PyTorch](https://github.com/erikwijmans/Pointnet2_PyTorch),
-[pointMLP-pytorch](https://github.com/ma-xu/pointMLP-pytorch)
+[pointMLP-pytorch](https://github.com/ma-xu/pointMLP-pytorch),
+[pvcnn](https://github.com/mit-han-lab/pvcnn.git).
