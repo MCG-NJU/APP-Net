@@ -6,7 +6,7 @@ from torch.utils.data import DataLoader
 
 import sys
 sys.path.append('..')
-from data import S3DIS_pn2, S3DIS_pvcnn, ScannetDataset
+from data import S3DIS_pn2, S3DIS_pvcnn
 from .APP_semseg import APPSemSeg
 
 
@@ -114,12 +114,6 @@ class PointNet2SemSegSSG(APPSemSeg):
             elif self.data_loader == 'pvcnn':
                 self.train_dset = S3DIS_pvcnn(self.input_feat, self.hparams['dataset.val_area'], self.hparams["num_points"], split='train', color_drop=self.color_drop)
                 self.val_dset = S3DIS_pvcnn(self.input_feat, self.hparams['dataset.val_area'], self.hparams["num_points"], split='test', color_drop=self.color_drop)
-            else:
-                AssertionError(f"Not Supported Loader {self.data_loader} for {self.dataset}!")
-        elif self.dataset == 'scannetv2':
-            if self.data_loader == 'pn2':
-                self.train_dset = ScannetDataset(self.input_feat, self.hparams["num_points"], phase='train', color_drop=self.color_drop)
-                self.val_dset = ScannetDataset(self.input_feat, self.hparams["num_points"], phase='val', color_drop=self.color_drop)
             else:
                 AssertionError(f"Not Supported Loader {self.data_loader} for {self.dataset}!")
         else:
